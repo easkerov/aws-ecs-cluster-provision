@@ -4,11 +4,10 @@
 DOCKERHUB_USERNAME=
 DOCKERHUB_PASSWORD=
 
-# Exporting Terraform environment variables
+# Exporting Terraform required environment variables
 export TF_VAR_aws_access_key_id=
 export TF_VAR_aws_secret_access_key=
 export TF_VAR_ecs_cluster="nginx-ecs-demo-cluster"
-#export TF_VAR_ecs_key_pair_name="nginx-key-pair"
 export TF_VAR_region="us-west-1"
 export TF_VAR_test_vpc="vpc_ecs_demo"
 export TF_VAR_test_network_cidr="192.168.0.0/16"
@@ -23,14 +22,14 @@ echo "Building nginx docker image..."
 docker build -t nginxhello .
 
 # Tag Nginx image
-docker tag nginxhello easkerov/nginxhello:latest
+docker tag nginxhello ${DOCKERHUB_USERNAME}/nginxhello:latest
 
 # Login to Docker Hub
 docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
 
 # Push Nginx image to Docker Hub
 echo "Pushing nginx docker image to Docker Hub..."
-docker push easkerov/nginxhello:latest
+docker push ${DOCKERHUB_USERNAME}/nginxhello:latest
 
 cd terraform/
 
@@ -40,3 +39,7 @@ terraform init
 # Run Terrafrom to apply ECS configuration
 echo "Applying Terraform configuration..."
 terraform apply -auto-approve 
+
+echo "Performing HTTP health check of ECS cluster..."
+sleep 30
+curl -Is http://$(terraform output ecs-load-balancer-dns-name) | head -1

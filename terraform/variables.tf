@@ -10,10 +10,6 @@ variable "ecs_cluster" {
   description = "ECS cluster name"
 }
 
-/*variable "ecs_key_pair_name" {
-  description = "ECS key pair name"
-}*/
-
 variable "region" {
   description = "AWS region"
 }
