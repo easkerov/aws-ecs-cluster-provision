@@ -15,7 +15,7 @@ variable "region" {
 }
 
 variable "availability_zone" {
-  description = "availability zone used for the demo, based on region"
+  description = "Availability zone based on region"
 
   default = {
     us-east-1 = "us-east-1"

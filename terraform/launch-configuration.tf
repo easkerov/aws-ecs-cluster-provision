@@ -5,7 +5,7 @@ resource "aws_launch_configuration" "ecs-launch-configuration" {
   iam_instance_profile = "${aws_iam_instance_profile.ecs-instance-profile.id}"
 
   root_block_device {
-    volume_type           = "standard"
+    volume_type           = "standard" # Default
     volume_size           = 100
     delete_on_termination = true
   }

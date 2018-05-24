@@ -36,6 +36,9 @@ cd terraform/
 # Run Terrafrom init
 terraform init 
 
+# Run Terrafrom plan
+terraform plan 
+
 # Run Terrafrom to apply ECS configuration
 echo "Applying Terraform configuration..."
 terraform apply -auto-approve 
