@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "ecs-launch-configuration" {
   name                 = "ecs-launch-configuration"
-  image_id             = "ami-69677709"
+  image_id             = "${var.ecs_ami_image_id}"
   instance_type        = "t2.micro"
   iam_instance_profile = "${aws_iam_instance_profile.ecs-instance-profile.id}"
 

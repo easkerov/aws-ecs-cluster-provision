@@ -10,6 +10,10 @@ variable "ecs_cluster" {
   description = "ECS cluster name"
 }
 
+variable "ecs_ami_image_id" {
+  description = "ECS Optimized AMI ID"
+}
+
 variable "region" {
   description = "AWS region"
 }

@@ -11,6 +11,9 @@ export TF_VAR_max_instance_size="2"
 export TF_VAR_min_instance_size="2"
 export TF_VAR_desired_capacity="2"
 
+TF_VAR_ecs_ami_image_id="$(aws ssm get-parameters --names /aws/service/ecs/optimized-ami/amazon-linux/recommended/image_id --region ${TF_VAR_region} --query "Parameters[0].Value")"
+export TF_VAR_ecs_ami_image_id
+
 cd terraform/
 
 # Run Terrafrom to destroy ECS configuration

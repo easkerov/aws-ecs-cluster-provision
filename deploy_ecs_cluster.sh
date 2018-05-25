@@ -17,6 +17,12 @@ export TF_VAR_max_instance_size="2"
 export TF_VAR_min_instance_size="2"
 export TF_VAR_desired_capacity="2"
 
+echo "Obtaining ECS optimized AMI image..."
+TF_VAR_ecs_ami_image_id="$(aws ssm get-parameters --names /aws/service/ecs/optimized-ami/amazon-linux/recommended/image_id --region ${TF_VAR_region} --query "Parameters[0].Value")"
+export TF_VAR_ecs_ami_image_id
+
+echo "AMI image: $TF_VAR_ecs_ami_image_id"
+
 # Building Nginx image based in Ubuntu 16.04 image
 echo "Building nginx docker image..."
 docker build -t nginxhello .
