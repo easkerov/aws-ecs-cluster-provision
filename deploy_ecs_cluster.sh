@@ -50,5 +50,9 @@ echo "Applying Terraform configuration..."
 terraform apply -auto-approve 
 
 echo "Performing HTTP health check of ECS cluster..."
-sleep 30
-curl -Is http://$(terraform output ecs-load-balancer-dns-name) | head -1
+for i in {1..30}
+    do
+        sleep 5
+        echo "Health check of ECS cluster. Try "${i}" of 30..." 
+        curl -Is http://$(terraform output ecs-load-balancer-dns-name) | head -1
+    done
